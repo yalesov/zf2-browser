@@ -44,7 +44,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     public function testRemoveOldCookie()
     {
         $fh = fopen('tmp/deleted', 'x+');
-        touch('tmp/deleted', time()-10*60);
+        touch('tmp/deleted', time()-15*60);
         fclose($fh);
 
         $fh = fopen('tmp/remaining', 'x+');

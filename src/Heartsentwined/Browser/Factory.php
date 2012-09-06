@@ -202,6 +202,7 @@ class Factory
             $cookieDir = $this->getCookieDir();
             if ($handle = opendir($cookieDir)) {
                 while (($file = readdir($handle)) !== false) {
+                    if ($file === '.' || $file === '..') continue;
                     if (filemtime("$cookieDir/$file")
                         <= time() - 60 * $this->getCookieLife()) {
                         @unlink("$cookieDir/$file");
