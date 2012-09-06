@@ -1,0 +1,20 @@
+<?php
+return array(
+    'di' => array(
+        'instance' => array(
+            'alias' => array(
+                'browser' => 'Heartsentwined\Browser\Browesr',
+            ),
+            'browser' => array(
+                'parameters' => array(
+                    'cookieDir'         => 'data/tmp/cookie',
+                    'cookiePrefix'      => 'browserCookie-',
+                    'cookieLife'        => 1440,
+                    'connectTimeout'    => 300,
+                    'options'           => array(),
+                    'headers'           => array(),
+                ),
+            ),
+        ),
+    ),
+);
