@@ -7,8 +7,8 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
+        if (!is_dir('tmp')) mkdir('tmp');
         $this->factory = new Factory;
-        mkdir('tmp');
         $this->factory
             ->setCookieDir('tmp');
     }
@@ -21,7 +21,6 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
                 unlink("tmp/$file");
             }
             closedir($handle);
-            rmdir('tmp');
         }
     }
 
@@ -44,7 +43,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     public function testRemoveOldCookie()
     {
         $fh = fopen('tmp/deleted', 'x+');
-        touch('tmp/deleted', time()-15*60);
+        touch('tmp/deleted', time()-10*60);
         fclose($fh);
 
         $fh = fopen('tmp/remaining', 'x+');

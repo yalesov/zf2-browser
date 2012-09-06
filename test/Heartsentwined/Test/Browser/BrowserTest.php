@@ -8,7 +8,7 @@ class BrowserTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        mkdir('tmp');
+        if (!is_dir('tmp')) mkdir('tmp');
         $factory = new Factory;
         $factory
             ->setCookieDir('tmp')
@@ -25,7 +25,6 @@ class BrowserTest extends \PHPUnit_Framework_TestCase
                 unlink("tmp/$file");
             }
             closedir($handle);
-            rmdir('tmp');
         }
     }
 

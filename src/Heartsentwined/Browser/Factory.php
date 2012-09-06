@@ -26,7 +26,7 @@ class Factory
     public function setCookieDir($cookieDir)
     {
         ArgValidator::assert($cookieDir, 'string');
-        $this->cookieDir = $cookieDir;
+        $this->cookieDir = realpath($cookieDir);
         return $this;
     }
 
@@ -131,29 +131,6 @@ class Factory
     }
 
     /**
-     * working directory
-     *
-     * @param string $wd
-     * @return $this
-     */
-    public function setWd($wd)
-    {
-        ArgValidator::assert($wd, 'string');
-        $this->wd = $wd;
-        return $this;
-    }
-
-    /**
-     * getWd
-     *
-     * @return string
-     */
-    public function getWd()
-    {
-        return $this->wd;
-    }
-
-    /**
      * get a new browser instance
      * useful if you want to clear previous state before browsing
      *
@@ -180,8 +157,6 @@ class Factory
             $adapter->setCurlOption(CURLOPT_CONNECTTIMEOUT, $connectTimeout);
         }
 
-        $this->setWd(getcwd());
-
         $cookieDir = $this->getCookieDir();
         if (!is_dir($cookieDir)) mkdir($cookieDir);
 
@@ -200,8 +175,6 @@ class Factory
     {
         clearstatcache();
         try {
-            $wd = getcwd();
-            chdir($this->getWd());
             $cookieDir = $this->getCookieDir();
             if (is_dir($cookieDir) && $handle = opendir($cookieDir)) {
                 while (($file = readdir($handle)) !== false) {
@@ -211,9 +184,8 @@ class Factory
                         unlink("$cookieDir/$file");
                     }
                 }
+                closedir($handle);
             }
-            closedir($handle);
-            chdir($wd);
         } catch (\Exception $e) {
         }
     }
