@@ -173,8 +173,8 @@ class Factory
         }
 
         //sets adapter here to force-load it, in order to set CURL opts
-        $this->setAdapter('Zend\Http\Client\Adapter\Curl');
-        $adapter = $this->getAdapter();
+        $browser->setAdapter('Zend\Http\Client\Adapter\Curl');
+        $adapter = $browser->getAdapter();
 
         if ($connectTimeout = $this->getConnectTimeout()) {
             $adapter->setCurlOption(CURLOPT_CONNECTTIMEOUT, $connectTimeout);

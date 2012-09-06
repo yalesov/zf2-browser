@@ -1,6 +1,6 @@
-# zf2-assetwig
+# zf2-browser
 
-v0.3.0
+v0.3.0 [![Build Status](https://secure.travis-ci.org/heartsentwined/zf2-browser.png)](http://travis-ci.org/heartsentwined/zf2-browser)
 
 web browser with quick browse methods using zf2's HTTP Client and cURL
 
