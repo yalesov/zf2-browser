@@ -182,8 +182,11 @@ class Factory
 
         $this->setWd(getcwd());
 
+        $cookieDir = $this->getCookieDir();
+        if (!is_dir($cookieDir)) mkdir($cookieDir);
+
         //random cookie file
-        $cookieFile = $this->getCookieDir() . '/' . md5(rand().microtime(true));
+        $cookieFile = $cookieDir . '/' . md5(rand().microtime(true));
         $fh = fopen($cookieFile, 'x+');
         fclose($fh);
 
