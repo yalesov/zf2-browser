@@ -10,7 +10,7 @@ return array(
                     'cookieDir'         => 'data/tmp/cookie',
                     'cookiePrefix'      => 'browserCookie-',
                     'cookieLife'        => 1440,
-                    'connectTimeout'    => 300,
+                    'connectTimeout'    => 120,
                     'options'           => array(),
                     'headers'           => array(),
                 ),
