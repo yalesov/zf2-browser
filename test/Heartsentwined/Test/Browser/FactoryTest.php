@@ -10,6 +10,16 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $this->factory = new Factory;
     }
 
+    public function tearDown()
+    {
+        $handle = opendir('tmp');
+        while (($file = readdir($handle)) !== false) {
+            unlink("tmp/$file");
+        }
+        closedir($handle);
+        rmdir('tmp');
+    }
+
     public function testCookie()
     {
         mkdir('tmp');
