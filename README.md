@@ -17,7 +17,7 @@ web browser with quick browse methods using zf2's HTTP Client and cURL
 }
 ```
 
-Copy `config/browser.local.php.dist` into `(app root)/config/browser.local.php`, and edit configs as described below.
+Copy `config/browser.local.php.dist` into `(app root)/config/autoload/browser.local.php`, and edit configs as described below.
 
 # Config
 
