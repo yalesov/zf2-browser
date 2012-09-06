@@ -8,7 +8,6 @@ return array(
             'browser' => array(
                 'parameters' => array(
                     'cookieDir'         => 'data/tmp/cookie',
-                    'cookiePrefix'      => 'browserCookie-',
                     'cookieLife'        => 1440,
                     'connectTimeout'    => 120,
                     'options'           => array(),

@@ -10,7 +10,6 @@ use Heartsentwined\Browser\Exception;
 class Factory
 {
     protected $cookieDir;
-    protected $cookiePrefix;
     protected $cookieLife;
     protected $connectTimeout;
     protected $options;
@@ -39,29 +38,6 @@ class Factory
     public function getCookieDir()
     {
         return $this->cookieDir;
-    }
-
-    /**
-     * prefix to all cookie files
-     *
-     * @param string $cookiePrefix
-     * @return $this
-     */
-    public function setCookiePrefix($cookiePrefix)
-    {
-        ArgValidator::assert($cookiePrefix, 'string');
-        $this->cookiePrefix = $cookiePrefix;
-        return $this;
-    }
-
-    /**
-     * getCookiePrefix
-     *
-     * @return string
-     */
-    public function getCookiePrefix()
-    {
-        return $this->cookiePrefix;
     }
 
     /**
@@ -185,6 +161,8 @@ class Factory
      */
     public function newInstance()
     {
+        ArgValidator::assert($this->getCookieDir(), array('string', 'min' => 1));
+
         $browser = new Browser;
 
         if ($options = $this->getOptions() && count($options)) {
@@ -205,8 +183,7 @@ class Factory
         $this->setWd(getcwd());
 
         //random cookie file
-        $cookieFile = $this->getCookieDir() . '/' . $this->getCookiePrefix()
-            . md5(rand().microtime(true));
+        $cookieFile = $this->getCookieDir() . '/' . md5(rand().microtime(true));
         $fh = fopen($cookieFile, 'x+');
         fclose($fh);
 

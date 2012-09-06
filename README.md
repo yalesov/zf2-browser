@@ -24,7 +24,6 @@ Copy `config/browser.local.php.dist` into `(app root)/config/autoload/browser.lo
 The `browser` alias can be changed to anything you like.
 
 - `cookieDir`: directory for storing cookies. Make sure you create this directory, and that it is writable by `www-data` (or whatever your PHP scripts run as).
-- `cookiePrefix`: prefix to all cookie files
 - `cookieLife`: lifetime for cookie files (minute)
 - `connectTimeout`: max time to wait when connecting (second)
 - `options`: wrapper for `\Zend\Http\Client::setOptions()`
