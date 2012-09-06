@@ -1,239 +1,69 @@
 <?php
 namespace Heartsentwined\Browser;
 
-use Heartsentwined\ArgValidator\ArgValidator;
 use Heartsentwined\Browser\Exception;
+use Zend\Http\Client;
 
 /**
- * factory class for browser client
+ * extended browser client
  */
-class Browser
+class Browser extends Client
 {
-    protected $cookieDir;
-    protected $cookiePrefix;
-    protected $cookieLife;
-    protected $connectTimeout;
-    protected $options;
-    protected $headers;
-
-    protected $wd;
-
     /**
-     * directory for storing cookies
+     * quick method to GET a page
      *
-     * @param string $cookieDir
-     * @return $this
+     * @param string $url
+     * @return string response body
      */
-    public function setCookieDir($cookieDir)
+    public function get($url = '')
     {
-        ArgValidator::assert($cookieDir, 'string');
-        $this->cookieDir = $cookieDir;
-        return $this;
-    }
-
-    /**
-     * getCookieDir
-     *
-     * @return string
-     */
-    public function getCookieDir()
-    {
-        return $this->cookieDir;
-    }
-
-    /**
-     * prefix to all cookie files
-     *
-     * @param string $cookiePrefix
-     * @return $this
-     */
-    public function setCookiePrefix($cookiePrefix)
-    {
-        ArgValidator::assert($cookiePrefix, 'string');
-        $this->cookiePrefix = $cookiePrefix;
-        return $this;
-    }
-
-    /**
-     * getCookiePrefix
-     *
-     * @return string
-     */
-    public function getCookiePrefix()
-    {
-        return $this->cookiePrefix;
-    }
-
-    /**
-     * lifetime for cookie files
-     *
-     * @param int $cookieLife (minute)
-     * @return $this
-     */
-    public function setCookieLife($cookieLife)
-    {
-        ArgValidator::assert($cookieLife, 'int');
-        $this->cookieLife = $cookieLife;
-        return $this;
-    }
-
-    /**
-     * getCookieLife
-     *
-     * @return int
-     */
-    public function getCookieLife()
-    {
-        return $this->cookieLife;
-    }
-
-    /**
-     * max time to wait when connecting
-     *
-     * @param int $connectTimeout (second)
-     * @return $this
-     */
-    public function setConnectTimeout($connectTimeout)
-    {
-        ArgValidator::assert($connectTimeout, 'int');
-        $this->connectTimeout = $connectTimeout;
-        return $this;
-    }
-
-    /**
-     * getConnectTimeout
-     *
-     * @return int
-     */
-    public function getConnectTimeout()
-    {
-        return $this->connectTimeout;
-    }
-
-    /**
-     * @see \Zend\Http\Client::setOptions()
-     *
-     * @param \Traversable $options
-     * @return $this
-     */
-    public function setOptions(\Traversable $options)
-    {
-        $this->options = $options;
-        return $this;
-    }
-
-    /**
-     * getOptions
-     *
-     * @return \Traversable
-     */
-    public function getOptions()
-    {
-        return $this->options;
-    }
-
-    /**
-     * @see \Zend\Http\Client::setHeaders()
-     *
-     * @param \Traversable $headers
-     * @return $this
-     */
-    public function setHeaders(\Traversable $headers)
-    {
-        $this->headers = $headers;
-        return $this;
-    }
-
-    /**
-     * getHeaders
-     *
-     * @return \Traversable
-     */
-    public function getHeaders()
-    {
-        return $this->headers;
-    }
-
-    /**
-     * working directory
-     *
-     * @param string $wd
-     * @return $this
-     */
-    public function setWd($wd)
-    {
-        ArgValidator::assert($wd, 'string');
-        $this->wd = $wd;
-        return $this;
-    }
-
-    /**
-     * getWd
-     *
-     * @return string
-     */
-    public function getWd()
-    {
-        return $this->wd;
-    }
-
-    /**
-     * get a new browser instance
-     * useful if you want to clear previous state before browsing
-     *
-     * @return Client
-     */
-    public function newInstance()
-    {
-        $client = new Client;
-
-        if ($options = $this->getOptions() && count($options)) {
-            $client->setOptions($options);
+        ArgValidator::assert($url, 'string');
+        if (!empty($url)) {
+            $this->setUri($url);
         }
-        if ($headers = $this->getHeaders() && count($headers)) {
-            $client->setHeaders($headers);
-        }
+        ArgValidator::assert($this->getUri(), array('string', 'min' => 1));
 
-        //sets adapter here to force-load it, in order to set CURL opts
-        $this->setAdapter('Zend\Http\Client\Adapter\Curl');
-        $adapter = $this->getAdapter();
-
-        if ($connectTimeout = $this->getConnectTimeout()) {
-            $adapter->setCurlOption(CURLOPT_CONNECTTIMEOUT, $connectTimeout);
-        }
-
-        $this->setWd(getcwd());
-
-        //random cookie file
-        $cookieFile = $this->getCookieDir() . '/' . $this->getCookiePrefix()
-            . md5(rand().microtime(true));
-        $fh = fopen($cookieFile, 'x+');
-        fclose($fh);
-
-        $adapter->setCurlOption(CURLOPT_COOKIEJAR, $cookieFile);
-        $adapter->setCurlOption(CURLOPT_COOKIEFILE, $cookieFile);
-
-        return $client;
-    }
-
-    public function __destruct()
-    {
-        clearstatcache();
         try {
-            $wd = getcwd();
-            chdir($this->getWd());
-            $cookieDir = $this->getCookieDir();
-            if ($handle = opendir($cookieDir)) {
-                while (($file = readdir($handle)) !== false) {
-                    if (filemtime("$cookieDir/$file")
-                        <= time() - 60 * $this->getCookieLife()) {
-                        @unlink("$cookieDir/$file");
-                    }
-                }
-            }
-            closedir($handle);
-            chdir($wd);
+            $oriMethod = $this->getMethod();
+            $this->setMethod('GET');
+
+            $body = $this->send()->getBody();
+
+            $this->setMethod($oriMethod);
+
+            return $body;
         } catch (\Exception $e) {
+            return '';
+        }
+    }
+
+    /**
+     * quick method to POST to a page
+     *
+     * @param string $url
+     * @param array $params
+     * @return string response body
+     */
+    public function post($url = '', array $params = array())
+    {
+        ArgValidator::assert($url, 'string');
+        if (!empty($url)) {
+            $this->setUri($url);
+        }
+        ArgValidator::assert($this->getUri(), array('string', 'min' => 1));
+
+        try {
+            $oriMethod = $this->getMethod();
+            $this->setMethod('POST');
+            $this->setParameterPost($params);
+
+            $body = $this->send()->getBody();
+
+            $this->setMethod($oriMethod);
+
+            return $body;
+        } catch (\Exception $e) {
+            return '';
         }
     }
 }
