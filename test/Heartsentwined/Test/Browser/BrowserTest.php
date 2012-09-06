@@ -19,13 +19,14 @@ class BrowserTest extends \PHPUnit_Framework_TestCase
 
     public function tearDown()
     {
-        $handle = opendir('tmp');
-        while (($file = readdir($handle)) !== false) {
-            if ($file === '.' || $file === '..') continue;
-            unlink("tmp/$file");
+        if ($handle = opendir('tmp')) {
+            while (($file = readdir($handle)) !== false) {
+                if ($file === '.' || $file === '..') continue;
+                unlink("tmp/$file");
+            }
+            closedir($handle);
+            rmdir('tmp');
         }
-        closedir($handle);
-        rmdir('tmp');
     }
 
     public function testGet()
