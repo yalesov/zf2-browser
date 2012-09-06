@@ -203,7 +203,7 @@ class Factory
             $wd = getcwd();
             chdir($this->getWd());
             $cookieDir = $this->getCookieDir();
-            if ($handle = opendir($cookieDir)) {
+            if (is_dir($cookieDir) && $handle = opendir($cookieDir)) {
                 while (($file = readdir($handle)) !== false) {
                     if ($file === '.' || $file === '..') continue;
                     if (filemtime("$cookieDir/$file")
