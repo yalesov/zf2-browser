@@ -8,12 +8,16 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->factory = new Factory;
+        mkdir('tmp');
+        $this->factory
+            ->setCookieDir('tmp');
     }
 
     public function tearDown()
     {
         $handle = opendir('tmp');
         while (($file = readdir($handle)) !== false) {
+            if ($file === '.' || $file === '..') continue;
             unlink("tmp/$file");
         }
         closedir($handle);
@@ -22,27 +26,22 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
     public function testCookie()
     {
-        mkdir('tmp');
         $this->factory
-            ->setCookieDir('tmp')
             ->newInstance();
 
         $fileCount = 0;
         $handle = opendir('tmp');
         while (($file = readdir($handle)) !== false) {
-            unlink("tmp/$file");
+            if ($file === '.' || $file === '..') continue;
             $fileCount++;
         }
         closedir($handle);
-        rmdir('tmp');
 
         $this->assertSame(1, $fileCount);
     }
 
     public function testRemoveOldCookie()
     {
-        mkdir('tmp');
-
         $fh = fopen('tmp/deleted', 'x+');
         touch('tmp/deleted', time()-10*60);
         fclose($fh);
@@ -52,7 +51,6 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         fclose($fh);
 
         $this->factory
-            ->setCookieDir('tmp')
             ->setCookieLife(10);
         unset($this->factory); //trigger destructor
 
@@ -60,6 +58,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $remainingCount = 0;
         $handle = opendir('tmp');
         while (($file = readdir($handle)) !== false) {
+            if ($file === '.' || $file === '..') continue;
             if (strpos($file, 'deleted') !== false) {
                 $deletedCount++;
             }
@@ -69,7 +68,6 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
             unlink("tmp/$file");
         }
         closedir($handle);
-        rmdir('tmp');
 
         $this->assertSame(0, $deletedCount);
         $this->assertSame(1, $remainingCount);

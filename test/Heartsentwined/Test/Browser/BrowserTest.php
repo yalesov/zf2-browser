@@ -21,6 +21,7 @@ class BrowserTest extends \PHPUnit_Framework_TestCase
     {
         $handle = opendir('tmp');
         while (($file = readdir($handle)) !== false) {
+            if ($file === '.' || $file === '..') continue;
             unlink("tmp/$file");
         }
         closedir($handle);
