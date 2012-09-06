@@ -18,6 +18,7 @@
     },
     "require": {
         "php": ">=5.3.3",
-        "heartsentwined/arg-validator": "1.0.*"
+        "heartsentwined/arg-validator": "1.0.*",
+        "zendframework/zend-http": "2.*"
     }
 }
