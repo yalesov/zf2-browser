@@ -208,7 +208,7 @@ class Factory
                     if ($file === '.' || $file === '..') continue;
                     if (filemtime("$cookieDir/$file")
                         <= time() - 60 * $this->getCookieLife()) {
-                        @unlink("$cookieDir/$file");
+                        unlink("$cookieDir/$file");
                     }
                 }
             }
