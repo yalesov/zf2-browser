@@ -22,7 +22,7 @@ class Browser extends Client
         if (!empty($url)) {
             $this->setUri($url);
         }
-        ArgValidator::assert($this->getUri(), array('string', 'min' => 1));
+        ArgValidator::assert($this->getUri(), 'notEmpty');
 
         try {
             $oriMethod = $this->getMethod();
@@ -51,7 +51,7 @@ class Browser extends Client
         if (!empty($url)) {
             $this->setUri($url);
         }
-        ArgValidator::assert($this->getUri(), array('string', 'min' => 1));
+        ArgValidator::assert($this->getUri(), 'notEmpty');
 
         try {
             $oriMethod = $this->getMethod();
