@@ -1,6 +1,6 @@
 # zf2-assetwig
 
-v0.1.0
+v0.3.0
 
 web browser with quick browse methods using zf2's HTTP Client and cURL
 
