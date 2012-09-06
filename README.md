@@ -10,9 +10,8 @@ web browser with quick browse methods using zf2's HTTP Client and cURL
 
 ```json
 {
-    "minimum-stability": "dev",
     "require": {
-        "heartsentwined/zf2-browser": "dev-master"
+        "heartsentwined/zf2-browser": "1.*"
     }
 }
 ```
@@ -23,7 +22,7 @@ Copy `config/browser.local.php.dist` into `(app root)/config/autoload/browser.lo
 
 The `browser` alias can be changed to anything you like.
 
-- `cookieDir`: directory for storing cookies. Make sure you create this directory, and that it is writable by `www-data` (or whatever your PHP scripts run as).
+- `cookieDir`: directory for storing cookies. Make sure you create this directory, and that it is writable by `www-data` (or whatever your PHP scripts run as); or at least that its parent directory is writable (the script will create this dir for you in this case).
 - `cookieLife`: lifetime for cookie files (minute)
 - `connectTimeout`: max time to wait when connecting (second)
 - `options`: wrapper for `\Zend\Http\Client::setOptions()`
