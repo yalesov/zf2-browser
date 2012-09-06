@@ -1,6 +1,7 @@
 <?php
 namespace Heartsentwined\Browser;
 
+use Heartsentwined\ArgValidator\ArgValidator;
 use Heartsentwined\Browser\Exception;
 use Zend\Http\Client;
 
