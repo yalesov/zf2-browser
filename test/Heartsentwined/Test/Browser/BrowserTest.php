@@ -33,13 +33,13 @@ class BrowserTest extends \PHPUnit_Framework_TestCase
         $body = $this->browser->get('http://google.com');
         $this->assertNotEmpty($body);
 
-        $body = $this->browser->get('http://asdfasdfasdfasdfasdfasdf.com');
+        $body = $this->browser->get('http://1.com');
         $this->assertSame('', $body);
 
         $body = $this->browser->get('');
         $this->assertSame('', $body);
 
-        $body = $this->browser->get('asdf');
+        $body = $this->browser->get('1');
         $this->assertSame('', $body);
     }
 
@@ -49,7 +49,7 @@ class BrowserTest extends \PHPUnit_Framework_TestCase
         $body = $this->browser->get();
         $this->assertNotEmpty($body);
 
-        $this->browser->setUri('http://asdfasdfasdfasdfasdfasdf.com');
+        $this->browser->setUri('http://1.com');
         $body = $this->browser->get();
         $this->assertSame('', $body);
 
@@ -57,7 +57,7 @@ class BrowserTest extends \PHPUnit_Framework_TestCase
         $body = $this->browser->get();
         $this->assertSame('', $body);
 
-        $this->browser->setUri('asdf');
+        $this->browser->setUri('1');
         $body = $this->browser->get();
         $this->assertSame('', $body);
     }
@@ -67,13 +67,13 @@ class BrowserTest extends \PHPUnit_Framework_TestCase
         $body = $this->browser->post('http://google.com', array());
         $this->assertNotEmpty($body);
 
-        $body = $this->browser->post('http://asdfasdfasdfasdfasdfasdf.com', array());
+        $body = $this->browser->post('http://1.com', array());
         $this->assertSame('', $body);
 
         $body = $this->browser->post('', array());
         $this->assertSame('', $body);
 
-        $body = $this->browser->post('asdf', array());
+        $body = $this->browser->post('1', array());
         $this->assertSame('', $body);
     }
 
@@ -83,7 +83,7 @@ class BrowserTest extends \PHPUnit_Framework_TestCase
         $body = $this->browser->post('', array());
         $this->assertNotEmpty($body);
 
-        $this->browser->setUri('http://asdfasdfasdfasdfasdfasdf.com');
+        $this->browser->setUri('http://1.com');
         $body = $this->browser->post('', array());
         $this->assertSame('', $body);
 
@@ -91,7 +91,7 @@ class BrowserTest extends \PHPUnit_Framework_TestCase
         $body = $this->browser->post('', array());
         $this->assertSame('', $body);
 
-        $this->browser->setUri('asdf');
+        $this->browser->setUri('1');
         $body = $this->browser->post('', array());
         $this->assertSame('', $body);
     }
