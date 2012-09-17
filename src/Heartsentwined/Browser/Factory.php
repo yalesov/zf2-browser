@@ -9,11 +9,11 @@ use Heartsentwined\Browser\Exception;
  */
 class Factory
 {
-    protected $cookieDir;
-    protected $cookieLife;
-    protected $connectTimeout;
-    protected $options;
-    protected $headers;
+    protected $cookieDir = 'data/tmp/cookie';
+    protected $cookieLife = 1440;
+    protected $connectTimeout = 120;
+    protected $options = array();
+    protected $headers = array();
 
     protected $wd;
 
@@ -21,11 +21,12 @@ class Factory
      * directory for storing cookies
      *
      * @param string $cookieDir
-     * @return $this
+     * @return self
      */
     public function setCookieDir($cookieDir)
     {
-        ArgValidator::assert($cookieDir, 'string');
+        ArgValidator::assert($cookieDir, array('string', 'min' => 1));
+        if (!is_dir($cookieDir)) mkdir($cookieDir, 0755, true);
         $this->cookieDir = realpath($cookieDir);
         return $this;
     }
@@ -44,7 +45,7 @@ class Factory
      * lifetime for cookie files
      *
      * @param int $cookieLife (minute)
-     * @return $this
+     * @return self
      */
     public function setCookieLife($cookieLife)
     {
@@ -67,7 +68,7 @@ class Factory
      * max time to wait when connecting
      *
      * @param int $connectTimeout (second)
-     * @return $this
+     * @return self
      */
     public function setConnectTimeout($connectTimeout)
     {
@@ -90,7 +91,7 @@ class Factory
      * @see \Zend\Http\Client::setOptions()
      *
      * @param \Traversable $options
-     * @return $this
+     * @return self
      */
     public function setOptions(\Traversable $options)
     {
@@ -112,7 +113,7 @@ class Factory
      * @see \Zend\Http\Client::setHeaders()
      *
      * @param \Traversable $headers
-     * @return $this
+     * @return self
      */
     public function setHeaders(\Traversable $headers)
     {
@@ -158,7 +159,6 @@ class Factory
         }
 
         $cookieDir = $this->getCookieDir();
-        if (!is_dir($cookieDir)) mkdir($cookieDir);
 
         //random cookie file
         $cookieFile = $cookieDir . '/' . md5(rand().microtime(true));
