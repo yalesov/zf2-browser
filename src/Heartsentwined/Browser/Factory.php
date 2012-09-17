@@ -26,8 +26,7 @@ class Factory
     public function setCookieDir($cookieDir)
     {
         ArgValidator::assert($cookieDir, array('string', 'min' => 1));
-        if (!is_dir($cookieDir)) mkdir($cookieDir, 0755, true);
-        $this->cookieDir = realpath($cookieDir);
+        $this->cookieDir = $cookieDir;
         return $this;
     }
 
@@ -159,6 +158,7 @@ class Factory
         }
 
         $cookieDir = $this->getCookieDir();
+        if (!is_dir($cookieDir)) mkdir($cookieDir, 0755, true);
 
         //random cookie file
         $cookieFile = $cookieDir . '/' . md5(rand().microtime(true));
