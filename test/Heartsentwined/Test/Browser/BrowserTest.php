@@ -25,6 +25,7 @@ class BrowserTest extends \PHPUnit_Framework_TestCase
                 unlink("tmp/$file");
             }
             closedir($handle);
+            rmdir('tmp');
         }
     }
 
@@ -33,13 +34,13 @@ class BrowserTest extends \PHPUnit_Framework_TestCase
         $body = $this->browser->get('http://google.com');
         $this->assertNotEmpty($body);
 
-        $body = $this->browser->get('http://1.com');
+        $body = $this->browser->get('http://example.test');
         $this->assertSame('', $body);
 
         $body = $this->browser->get('');
         $this->assertSame('', $body);
 
-        $body = $this->browser->get('1');
+        $body = $this->browser->get('example');
         $this->assertSame('', $body);
     }
 
@@ -49,7 +50,7 @@ class BrowserTest extends \PHPUnit_Framework_TestCase
         $body = $this->browser->get();
         $this->assertNotEmpty($body);
 
-        $this->browser->setUri('http://1.com');
+        $this->browser->setUri('http://example.test');
         $body = $this->browser->get();
         $this->assertSame('', $body);
 
@@ -57,7 +58,7 @@ class BrowserTest extends \PHPUnit_Framework_TestCase
         $body = $this->browser->get();
         $this->assertSame('', $body);
 
-        $this->browser->setUri('1');
+        $this->browser->setUri('example');
         $body = $this->browser->get();
         $this->assertSame('', $body);
     }
@@ -67,13 +68,13 @@ class BrowserTest extends \PHPUnit_Framework_TestCase
         $body = $this->browser->post('http://google.com', array());
         $this->assertNotEmpty($body);
 
-        $body = $this->browser->post('http://1.com', array());
+        $body = $this->browser->post('http://example.test', array());
         $this->assertSame('', $body);
 
         $body = $this->browser->post('', array());
         $this->assertSame('', $body);
 
-        $body = $this->browser->post('1', array());
+        $body = $this->browser->post('example', array());
         $this->assertSame('', $body);
     }
 
@@ -83,7 +84,7 @@ class BrowserTest extends \PHPUnit_Framework_TestCase
         $body = $this->browser->post('', array());
         $this->assertNotEmpty($body);
 
-        $this->browser->setUri('http://1.com');
+        $this->browser->setUri('http://example.test');
         $body = $this->browser->post('', array());
         $this->assertSame('', $body);
 
@@ -91,7 +92,7 @@ class BrowserTest extends \PHPUnit_Framework_TestCase
         $body = $this->browser->post('', array());
         $this->assertSame('', $body);
 
-        $this->browser->setUri('1');
+        $this->browser->setUri('example');
         $body = $this->browser->post('', array());
         $this->assertSame('', $body);
     }
