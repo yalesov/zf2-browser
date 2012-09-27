@@ -2,7 +2,6 @@
 namespace Heartsentwined\Test\Browser;
 
 use Heartsentwined\Browser\Factory;
-use Heartsentwined\Browser\Exception;
 
 class BrowserTest extends \PHPUnit_Framework_TestCase
 {

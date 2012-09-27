@@ -13,7 +13,7 @@ class Browser extends Client
     /**
      * quick method to GET a page
      *
-     * @param string $url
+     * @param  string $url
      * @return string response body
      */
     public function get($url = '')
@@ -41,8 +41,8 @@ class Browser extends Client
     /**
      * quick method to POST to a page
      *
-     * @param string $url
-     * @param array $params
+     * @param  string $url
+     * @param  array  $params
      * @return string response body
      */
     public function post($url = '', array $params = array())

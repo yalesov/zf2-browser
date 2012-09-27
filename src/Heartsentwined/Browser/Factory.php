@@ -20,13 +20,14 @@ class Factory
     /**
      * directory for storing cookies
      *
-     * @param string $cookieDir
+     * @param  string $cookieDir
      * @return self
      */
     public function setCookieDir($cookieDir)
     {
         ArgValidator::assert($cookieDir, array('string', 'min' => 1));
         $this->cookieDir = $cookieDir;
+
         return $this;
     }
 
@@ -43,13 +44,14 @@ class Factory
     /**
      * lifetime for cookie files
      *
-     * @param int $cookieLife (minute)
+     * @param  int  $cookieLife (minute)
      * @return self
      */
     public function setCookieLife($cookieLife)
     {
         ArgValidator::assert($cookieLife, 'int');
         $this->cookieLife = $cookieLife;
+
         return $this;
     }
 
@@ -66,13 +68,14 @@ class Factory
     /**
      * max time to wait when connecting
      *
-     * @param int $connectTimeout (second)
+     * @param  int  $connectTimeout (second)
      * @return self
      */
     public function setConnectTimeout($connectTimeout)
     {
         ArgValidator::assert($connectTimeout, 'int');
         $this->connectTimeout = $connectTimeout;
+
         return $this;
     }
 
@@ -89,12 +92,13 @@ class Factory
     /**
      * @see \Zend\Http\Client::setOptions()
      *
-     * @param \Traversable $options
+     * @param  \Traversable $options
      * @return self
      */
     public function setOptions(\Traversable $options)
     {
         $this->options = $options;
+
         return $this;
     }
 
@@ -111,12 +115,13 @@ class Factory
     /**
      * @see \Zend\Http\Client::setHeaders()
      *
-     * @param \Traversable $headers
+     * @param  \Traversable $headers
      * @return self
      */
     public function setHeaders(\Traversable $headers)
     {
         $this->headers = $headers;
+
         return $this;
     }
 
