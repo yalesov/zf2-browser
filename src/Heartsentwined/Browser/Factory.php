@@ -92,10 +92,10 @@ class Factory
     /**
      * @see \Zend\Http\Client::setOptions()
      *
-     * @param  \Traversable $options
+     * @param  array $options
      * @return self
      */
-    public function setOptions(\Traversable $options)
+    public function setOptions(array $options)
     {
         $this->options = $options;
 
@@ -115,10 +115,10 @@ class Factory
     /**
      * @see \Zend\Http\Client::setHeaders()
      *
-     * @param  \Traversable $headers
+     * @param  array $headers
      * @return self
      */
-    public function setHeaders(\Traversable $headers)
+    public function setHeaders(array $headers)
     {
         $this->headers = $headers;
 
