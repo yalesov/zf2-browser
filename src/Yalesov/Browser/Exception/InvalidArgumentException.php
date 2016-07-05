@@ -1,7 +1,7 @@
 <?php
-namespace Heartsentwined\Browser\Exception;
+namespace Yalesov\Browser\Exception;
 
-use Heartsentwined\Browser\ExceptionInterface;
+use Yalesov\Browser\ExceptionInterface;
 
 class InvalidArgumentException
     extends \InvalidArgumentException

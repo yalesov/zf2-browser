@@ -1,8 +1,8 @@
 <?php
-namespace Heartsentwined\Browser;
+namespace Yalesov\Browser;
 
-use Heartsentwined\ArgValidator\ArgValidator;
-use Heartsentwined\Browser\Exception;
+use Yalesov\ArgValidator\ArgValidator;
+use Yalesov\Browser\Exception;
 use Zend\Http\Client;
 
 /**

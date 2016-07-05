@@ -1,6 +1,6 @@
 # zf2-browser
 
-[![Build Status](https://secure.travis-ci.org/heartsentwined/zf2-browser.png)](http://travis-ci.org/heartsentwined/zf2-browser)
+[![Build Status](https://secure.travis-ci.org/yalesov/zf2-browser.png)](http://travis-ci.org/yalesov/zf2-browser)
 
 web browser with quick browse methods using zf2's HTTP Client and cURL
 
@@ -11,7 +11,7 @@ web browser with quick browse methods using zf2's HTTP Client and cURL
 ```json
 {
     "require": {
-        "heartsentwined/zf2-browser": "1.*"
+        "yalesov/zf2-browser": "1.*"
     }
 }
 ```

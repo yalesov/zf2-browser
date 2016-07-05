@@ -1,7 +1,7 @@
 <?php
-namespace Heartsentwined\Test\Browser;
+namespace Yalesov\Test\Browser;
 
-use Heartsentwined\Browser\Factory;
+use Yalesov\Browser\Factory;
 
 class BrowserTest extends \PHPUnit_Framework_TestCase
 {

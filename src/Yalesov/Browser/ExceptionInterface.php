@@ -1,5 +1,5 @@
 <?php
-namespace Heartsentwined\Browser;
+namespace Yalesov\Browser;
 
 interface ExceptionInterface
 {
