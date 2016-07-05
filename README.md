@@ -1,6 +1,6 @@
 # zf2-browser
 
-[![Build Status](https://secure.travis-ci.org/yalesov/zf2-browser.png)](http://travis-ci.org/yalesov/zf2-browser)
+[![Build Status](https://travis-ci.org/yalesov/zf2-browser.svg)](https://travis-ci.org/yalesov/zf2-browser)
 
 web browser with quick browse methods using zf2's HTTP Client and cURL
 
