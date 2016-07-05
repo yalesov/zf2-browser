@@ -13,6 +13,9 @@
         "yalesov/arg-validator": "2.*",
         "zendframework/zend-http": "2.*"
     },
+    "require-dev": {
+        "phpunit/phpunit": "*"
+    },
     "autoload": {
         "psr-0": {
             "Yalesov\\Browser": "src/"
