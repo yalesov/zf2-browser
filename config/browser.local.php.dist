@@ -1,19 +1,19 @@
 <?php
 return array(
-    'di' => array(
-        'instance' => array(
-            'alias' => array(
-                'browser' => 'Yalesov\Browser\Factory',
-            ),
-            'browser' => array(
-                'parameters' => array(
-                    'cookieDir'         => 'data/tmp/cookie',
-                    'cookieLife'        => 1440,
-                    'connectTimeout'    => 120,
-                    'options'           => array(),
-                    'headers'           => array(),
-                ),
-            ),
+  'di' => array(
+    'instance' => array(
+      'alias' => array(
+        'browser' => 'Yalesov\Browser\Factory',
+      ),
+      'browser' => array(
+        'parameters' => array(
+          'cookieDir'     => 'data/tmp/cookie',
+          'cookieLife'    => 1440,
+          'connectTimeout'  => 120,
+          'options'       => array(),
+          'headers'       => array(),
         ),
+      ),
     ),
+  ),
 );

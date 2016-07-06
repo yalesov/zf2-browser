@@ -1,35 +1,35 @@
 {
-    "name": "yalesov/zf2-browser",
-    "description": "web browser with quick browse methods using zf2's HTTP Client and cURL",
-    "keywords": ["browser", "zf2", "curl"],
-    "authors": [
-        {
-            "name": "Yulij Andreevich Lesov",
-            "email": "yalesov@gmail.com"
-        }
-    ],
-    "require": {
-        "php": ">=5.3.3",
-        "yalesov/arg-validator": "2.*",
-        "zendframework/zend-http": "2.*"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "*"
-    },
-    "autoload": {
-        "psr-0": {
-            "Yalesov\\Browser": "src/"
-        }
-    },
-    "license": "ISC",
-    "homepage": "https://github.com/yalesov/zf2-browser",
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/yalesov/zf2-browser"
-        }
-    ],
-    "support": {
-        "issues": "https://github.com/yalesov/zf2-browser/issues"
+  "name": "yalesov/zf2-browser",
+  "description": "web browser with quick browse methods using zf2's HTTP Client and cURL",
+  "keywords": ["browser", "zf2", "curl"],
+  "authors": [
+    {
+      "name": "Yulij Andreevich Lesov",
+      "email": "yalesov@gmail.com"
     }
+  ],
+  "require": {
+    "php": ">=5.3.3",
+    "yalesov/arg-validator": "2.*",
+    "zendframework/zend-http": "2.*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "*"
+  },
+  "autoload": {
+    "psr-0": {
+      "Yalesov\\Browser": "src/"
+    }
+  },
+  "license": "ISC",
+  "homepage": "https://github.com/yalesov/zf2-browser",
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/yalesov/zf2-browser"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/yalesov/zf2-browser/issues"
+  }
 }

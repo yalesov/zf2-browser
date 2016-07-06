@@ -10,61 +10,61 @@ use Zend\Http\Client;
  */
 class Browser extends Client
 {
-    /**
-     * quick method to GET a page
-     *
-     * @param  string $url
-     * @return string response body
-     */
-    public function get($url = '')
-    {
-        ArgValidator::assert($url, 'string');
-        if (!empty($url)) {
-            $this->setUri($url);
-        }
-        ArgValidator::assert($this->getUri(), 'notEmpty');
-
-        try {
-            $oriMethod = $this->getMethod();
-            $this->setMethod('GET');
-
-            $body = $this->send()->getBody();
-
-            $this->setMethod($oriMethod);
-
-            return $body;
-        } catch (\Exception $e) {
-            return '';
-        }
+  /**
+   * quick method to GET a page
+   *
+   * @param  string $url
+   * @return string response body
+   */
+  public function get($url = '')
+  {
+    ArgValidator::assert($url, 'string');
+    if (!empty($url)) {
+      $this->setUri($url);
     }
+    ArgValidator::assert($this->getUri(), 'notEmpty');
 
-    /**
-     * quick method to POST to a page
-     *
-     * @param  string $url
-     * @param  array  $params
-     * @return string response body
-     */
-    public function post($url = '', array $params = array())
-    {
-        ArgValidator::assert($url, 'string');
-        if (!empty($url)) {
-            $this->setUri($url);
-        }
-        ArgValidator::assert($this->getUri(), 'notEmpty');
+    try {
+      $oriMethod = $this->getMethod();
+      $this->setMethod('GET');
 
-        try {
-            $oriMethod = $this->getMethod();
-            $this->setMethod('POST');
-            $this->setParameterPost($params);
+      $body = $this->send()->getBody();
 
-            $body = $this->send()->getBody();
+      $this->setMethod($oriMethod);
 
-            $this->setMethod($oriMethod);
-
-            return $body;
-        } catch (\Exception $e) {
-            return '';
-        }
+      return $body;
+    } catch (\Exception $e) {
+      return '';
     }
+  }
+
+  /**
+   * quick method to POST to a page
+   *
+   * @param  string $url
+   * @param  array  $params
+   * @return string response body
+   */
+  public function post($url = '', array $params = array())
+  {
+    ArgValidator::assert($url, 'string');
+    if (!empty($url)) {
+      $this->setUri($url);
+    }
+    ArgValidator::assert($this->getUri(), 'notEmpty');
+
+    try {
+      $oriMethod = $this->getMethod();
+      $this->setMethod('POST');
+      $this->setParameterPost($params);
+
+      $body = $this->send()->getBody();
+
+      $this->setMethod($oriMethod);
+
+      return $body;
+    } catch (\Exception $e) {
+      return '';
+    }
+  }
 }
