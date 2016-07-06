@@ -10,9 +10,9 @@ web browser with quick browse methods using zf2's HTTP Client and cURL
 
 ```json
 {
-    "require": {
-        "yalesov/zf2-browser": "2.*"
-    }
+  "require": {
+    "yalesov/zf2-browser": "2.*"
+  }
 }
 ```
 
